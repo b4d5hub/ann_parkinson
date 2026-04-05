@@ -50,3 +50,8 @@ yarn-error.log*
 # Uncomment to ignore RARs if desired:
 # *.rar
 # *.zip
+
+# Project drafts and reports
+create_notebook.py
+report/
+presentation/

@@ -48,7 +48,7 @@ yarn-error.log*
 
 # Ignore large archives just in case (optional, keeping it here for safety)
 # Uncomment to ignore RARs if desired:
-# *.rar
+*.rar
 # *.zip
 
 # Project drafts and reports

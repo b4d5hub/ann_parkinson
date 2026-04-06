@@ -3,11 +3,13 @@
 > A comparative ANN study for Parkinson's disease prediction, with analysis of activation functions,
 > loss functions, SGD optimization, overfitting control using dropout, and discussion of the vanishing gradient problem.
 
+⭐ **NEW UPDATE (Live Presentation Simulator):** We have integrated a full-stack Web Application built with **React (Vite), Three.js, and Flask**. It allows for real-time visual simulation of the trained Keras model, including a Web Audio API driven live diagnosis interface using voice commands!
+
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 ANN_Parkinson_Project/
 │
 ├── data/
@@ -16,19 +18,16 @@ ANN_Parkinson_Project/
 ├── notebooks/
 │   └── ann_parkinsons.ipynb     ← Main notebook (all experiments)
 │
-├── figures/                     ← Auto-generated plots
-│   ├── class_distribution.png
-│   ├── correlation_heatmap.png
-│   ├── loss_curve.png
-│   ├── accuracy_curve.png
-│   └── confusion_matrix.png
+├── models/
+│   └── parkinsons_model.h5      ← Exported Keras AI Model
 │
-├── report/
-│   └── report.docx              ← Final written report
+├── simulation_app/              ← ⚛️ NEW: React/Vite 3D Frontend App
+│   ├── src/components/          ← UI, Dashboard, 3D Avatar, Web Audio Panel
+│   └── src/hooks/               ← useAudioAnalyzer hook for live voice extraction
 │
-├── presentation/
-│   └── ANN_Parkinsons.pptx      ← 20-min oral presentation slides
-│
+├── server.py                    ← 🐍 NEW: Flask API Python Backend
+├── start_app.bat                ← 🚀 NEW: Master Launcher Script
+├── run_project.bat              ← Legacy Notebook setup script
 └── README.md
 ```
 
@@ -41,26 +40,38 @@ ANN_Parkinson_Project/
 | Member 1 | Theory & Literature       | Section 1 – ANN Theory                      |
 | Member 2 | Data & Preprocessing      | Section 2 – EDA & Preprocessing             |
 | Member 3 | Modeling & Experiments    | Sections 3–6 – Model Building & Experiments |
-| Member 4 | Evaluation & Presentation | Section 7 – Results, Metrics, Conclusion    |
+| Member 4 | Evaluation & Presentation | Section 7 – Results, Metrics, Web Simulator |
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Run the Full Stack Application
 
-### Option A — Google Colab (Recommended)
-1. Upload the `notebooks/ann_parkinsons.ipynb` file to [Google Colab](https://colab.research.google.com/)
-2. Upload `data/parkinsons.csv` to the Colab session or mount Google Drive
-3. Run all cells in order (`Runtime > Run all`)
+Instead of just running a static notebook, you can now boot up the **Clinical Presentation Simulator**.
 
-### Option B — Local (Jupyter)
+### Step 1: Launch the API & Web App (Windows)
+Simply double-click the master batch file from the root directory:
 ```bash
-pip install tensorflow pandas numpy matplotlib seaborn scikit-learn
-jupyter notebook notebooks/ann_parkinsons.ipynb
+./start_app.bat
 ```
+This script will automatically:
+1. Boot the **Flask Python API (`server.py`)** on Port `5000`. (This loads the dataset to recreate `StandardScaler` perfectly and loads your `.h5` model into memory).
+2. Boot the **React Frontend App** on `http://localhost:5173`.
+3. Open the original **Jupyter Notebook** so you can view the training metrics.
+
+### Step 2: Use the Simulation Dashboard
+- Open your browser to `http://localhost:5173`.
+- **Slide the Parameters**: Drag the Jitter, Shimmer, and HNR sliders to instantly see the real `.h5` neural network predict the percentage of Parkinson's Disease.
+- **Live Diagnosis Test**: Click the flashing microphone button and read a sentence into your laptop. The web app uses standard Web Audio API to calculate your vocal fluctuations and automatically feeds those exact measurements into the AI.
+- **Sim. High Risk / Normal**: Instantly inject dangerous or healthy parameters to test the UI alarms.
+
+### Alternative (Google Colab - Notebook Only)
+1. Upload the `notebooks/ann_parkinsons.ipynb` file to [Google Colab](https://colab.research.google.com/)
+2. Upload `data/parkinsons.csv` to the Colab session.
+3. Run all cells in order (`Runtime > Run all`).
 
 ---
 
-## 📊 Experiments Covered
+## 📊 Experiments Covered (Notebook)
 
 | # | Experiment                         | Purpose                                       |
 |---|------------------------------------|-----------------------------------------------|
@@ -102,4 +113,4 @@ model.compile(optimizer=SGD(learning_rate=0.01), loss='binary_crossentropy', met
 - Goodfellow et al., *Deep Learning*, MIT Press, 2016
 - Chollet, F., *Deep Learning with Python*, Manning, 2021
 - TensorFlow / Keras Documentation — https://keras.io
-- Scikit-learn Documentation — https://scikit-learn.org
+- React Three Fiber — https://docs.pmnd.rs/react-three-fiber

@@ -1,4 +1,6 @@
 flask
 flask-cors
 numpy
-onnxruntime
+h5py
+pandas
+scikit-learn

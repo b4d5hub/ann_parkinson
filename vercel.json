@@ -2,18 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "flask_simulation_app/app.py",
+      "src": "server.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/flask_simulation_app/static/$1"
+      "src": "/predict",
+      "dest": "/server.py"
     },
     {
       "src": "/(.*)",
-      "dest": "flask_simulation_app/app.py"
+      "dest": "/server.py"
     }
   ]
 }

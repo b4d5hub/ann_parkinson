@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Parkinson's Disease Prediction — Neural Simulation Core powered by Artificial Neural Networks" />
+  <title>Neural Simulation Core — Parkinson's ANN</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Three.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <!-- ─── Ambient Glow ─────────────────────────────────── -->
+  <div class="ambient-glow"></div>
+
+  <div class="app-container">
+    <!-- ═══════════════════════════════════════════════════
+         LEFT PANEL — Controls
+         ═══════════════════════════════════════════════════ -->
+    <aside class="glass-panel left-panel" id="controls-panel">
+      <div class="panel-header">
+        <h2><i data-lucide="sliders-horizontal"></i> Parameters</h2>
+        <p class="subtitle">Adjust biomarkers for simulation</p>
+      </div>
+
+      <div class="controls-scroll" id="sliders-container">
+        <!-- Sliders injected by JS -->
+      </div>
+
+      <div class="simulation-tools">
+        <h4>Simulation Tools</h4>
+        <div class="sim-buttons">
+          <button class="glass-button small" id="btn-sim-high">
+            <i data-lucide="alert-triangle"></i> Sim. High Risk
+          </button>
+          <button class="glass-button small" id="btn-sim-normal">
+            <i data-lucide="heart-pulse"></i> Sim. Normal
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <button class="glass-button full" id="btn-reset">
+          <i data-lucide="rotate-ccw"></i> Reset Parameters
+        </button>
+      </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════════════════
+         CENTER PANEL — 3D Brain & Voice Bar
+         ═══════════════════════════════════════════════════ -->
+    <main class="center-panel" id="center-panel">
+      <div class="header-bar">
+        <h1>Neural Simulation Core</h1>
+      </div>
+
+      <div id="three-canvas"></div>
+
+      <!-- Live Diagnostic Bar -->
+      <div class="voice-bar" id="voice-bar">
+        <div class="voice-bar-inner">
+          <button class="mic-button" id="btn-mic">
+            <i data-lucide="mic" id="mic-icon"></i>
+          </button>
+          <div class="voice-text">
+            <span class="voice-label" id="voice-label">Live Web Audio Diagnostic</span>
+            <span class="voice-status" id="voice-status">Press Mic & read a short sentence.</span>
+          </div>
+          <div class="divider-v"></div>
+          <div class="system-ready">
+            <i data-lucide="check-circle-2"></i>
+            <span>System Ready</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════
+         RIGHT PANEL — Analysis Results
+         ═══════════════════════════════════════════════════ -->
+    <aside class="glass-panel right-panel" id="results-panel">
+      <div class="panel-header">
+        <h2><i data-lucide="brain-circuit"></i> Analysis</h2>
+        <p class="subtitle">Real-time ANN Prediction</p>
+      </div>
+
+      <div class="results-body">
+        <!-- Prediction Score Box -->
+        <div class="score-box" id="score-box">
+          <div class="score-icon-wrap" id="score-icon-wrap">
+            <i data-lucide="shield-check" id="score-icon"></i>
+          </div>
+          <h3 class="score-label">PREDICTION SCORE</h3>
+          <div class="score-value-wrap">
+            <span class="score-value" id="score-value">0</span>
+            <span class="score-pct">%</span>
+          </div>
+          <p class="score-status" id="score-status">PARAMETERS NORMAL</p>
+        </div>
+
+        <!-- Feature Impact -->
+        <div class="feature-impact">
+          <h4><i data-lucide="bar-chart-3"></i> Feature Impact</h4>
+          <div class="impact-bars">
+            <div class="impact-row">
+              <span>Freq Variations</span>
+              <div class="bar-track"><div class="bar-fill" id="bar-jitter"></div></div>
+            </div>
+            <div class="impact-row">
+              <span>Amp Variations</span>
+              <div class="bar-track"><div class="bar-fill" id="bar-shimmer"></div></div>
+            </div>
+            <div class="impact-row">
+              <span>Noise Ratio</span>
+              <div class="bar-track"><div class="bar-fill" id="bar-hnr"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <button class="glass-button full subtle" id="btn-export">
+          <i data-lucide="download"></i> Export Report
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

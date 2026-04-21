@@ -98,13 +98,29 @@ const ResultsPanel = ({ params }) => {
       doc.text('Acoustic Biomarker Parameters', 14, 100);
 
       const tableData = [
-        ['Parameter', 'Description', 'Value Recorded'],
-        ['MDVP:Fo(Hz)', 'Average vocal fundamental frequency', params.fo],
-        ['MDVP:Jitter(%)', 'Measure of variation in fundamental frequency', params.jitter],
-        ['MDVP:Shimmer', 'Measure of variation in amplitude', params.shimmer],
-        ['HNR', 'Ratio of noise to tonal components in the voice', params.hnr],
-        ['RPDE', 'Nonlinear dynamical complexity measure', params.rpde],
-        ['DFA', 'Signal fractal scaling exponent', params.dfa]
+        ['Parameter', 'Value', 'Source Type'],
+        ['MDVP:Fo(Hz)', params.fo?.toFixed(2) || '-', 'Live Audio Analysis'],
+        ['MDVP:Fhi(Hz)', '223.64', 'Normative Baseline'],
+        ['MDVP:Flo(Hz)', '145.21', 'Normative Baseline'],
+        ['MDVP:Jitter(%)', params.jitter?.toFixed(5) || '-', 'Live Audio Analysis'],
+        ['MDVP:Jitter(Abs)', '0.00002', 'Normative Baseline'],
+        ['MDVP:RAP', '0.0019', 'Normative Baseline'],
+        ['MDVP:PPQ', '0.0021', 'Normative Baseline'],
+        ['Jitter:DDP', '0.0058', 'Normative Baseline'],
+        ['MDVP:Shimmer', params.shimmer?.toFixed(4) || '-', 'Live Audio Analysis'],
+        ['MDVP:Shimmer(dB)', '0.1630', 'Normative Baseline'],
+        ['Shimmer:APQ3', '0.0095', 'Normative Baseline'],
+        ['Shimmer:APQ5', '0.0105', 'Normative Baseline'],
+        ['MDVP:APQ', '0.0133', 'Normative Baseline'],
+        ['Shimmer:DDA', '0.0285', 'Normative Baseline'],
+        ['NHR', '0.0115', 'Normative Baseline'],
+        ['HNR', params.hnr?.toFixed(2) || '-', 'Live Audio Analysis'],
+        ['RPDE', params.rpde?.toFixed(4) || '-', 'Live Audio Analysis'],
+        ['DFA', params.dfa?.toFixed(4) || '-', 'Live Audio Analysis'],
+        ['spread1', '-6.7593', 'Normative Baseline'],
+        ['spread2', '0.1603', 'Normative Baseline'],
+        ['D2', '2.1545', 'Normative Baseline'],
+        ['PPE', '0.1230', 'Normative Baseline']
       ];
 
       autoTable(doc, {
@@ -112,12 +128,12 @@ const ResultsPanel = ({ params }) => {
         head: [tableData[0]],
         body: tableData.slice(1),
         theme: 'grid',
-        headStyles: { fillColor: [41, 128, 185], textColor: 255 },
-        styles: { fontSize: 10, cellPadding: 5 },
+        headStyles: { fillColor: [15, 23, 42], textColor: 255 },
+        styles: { fontSize: 8, cellPadding: 2 },
         columnStyles: {
-            0: { fontStyle: 'bold', cellWidth: 40 },
-            1: { cellWidth: 90 },
-            2: { halign: 'right' }
+            0: { fontStyle: 'bold', cellWidth: 50 },
+            1: { cellWidth: 40, halign: 'right' },
+            2: { cellWidth: 90 }
         }
       });
       

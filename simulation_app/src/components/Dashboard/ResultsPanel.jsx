@@ -41,7 +41,7 @@ const ResultsPanel = ({ params }) => {
   }, [params]);
 
   const isHighRisk = probability > 50;
-  const statusColor = isHighRisk ? '#FF265B' : '#00F0FF';
+  const statusColor = isHighRisk ? 'var(--status-danger)' : 'var(--status-safe)';
   const StatusIcon = isHighRisk ? ShieldAlert : ShieldCheck;
 
   const handleExport = async () => {
@@ -170,7 +170,7 @@ const ResultsPanel = ({ params }) => {
         
         {/* Main Status Display */}
         <div style={{ 
-          background: 'rgba(0,0,0,0.4)', 
+          background: 'var(--panel-inner-bg)', 
           borderRadius: '16px', 
           padding: '24px', 
           display: 'flex', 
@@ -216,7 +216,7 @@ const ResultsPanel = ({ params }) => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '4px' }}>
                   <span style={{ color: 'var(--text-main)' }}>{feature.label}</span>
                 </div>
-                <div style={{ height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
+                <div style={{ height: '6px', background: 'var(--track-bg)', borderRadius: '3px', overflow: 'hidden' }}>
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.min(feature.val * 3, 100)}%` }}

@@ -12,6 +12,11 @@
   --glass-bg: rgba(20, 20, 30, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-border-hover: rgba(0, 240, 255, 0.3);
+  
+  --status-safe: #00F0FF;
+  --status-danger: #FF265B;
+  --panel-inner-bg: rgba(0, 0, 0, 0.4);
+  --track-bg: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -129,12 +134,39 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Light Mode Overrides */
 .app-container.light-mode {
-  --bg-base: #f1f5f9;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #e2e8f0 0%, #f1f5f9 70%);
+  --bg-base: #f8fafc;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #f1f5f9 70%);
   --text-main: #0f172a;
-  --text-muted: #475569;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.1);
+  --text-muted: #64748b;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --glass-border-hover: rgba(2, 132, 199, 0.5);
+  
+  --accent-teal: #0284c7;
+  --accent-teal-glow: rgba(2, 132, 199, 0.2);
+  --accent-purple: #7e22ce;
+  --accent-purple-glow: rgba(126, 34, 206, 0.2);
+  
+  --status-safe: #059669;
+  --status-danger: #e11d48;
+  --panel-inner-bg: rgba(255, 255, 255, 0.6);
+  --track-bg: rgba(15, 23, 42, 0.1);
+}
+
+.app-container.light-mode .glass-panel {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.app-container.light-mode .glass-button {
+  background: white;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.app-container.light-mode .glass-button:hover {
+  border-color: var(--accent-teal);
+  background: #f8fafc;
+  box-shadow: 0 4px 12px var(--accent-teal-glow);
 }
 
 .app-container.light-mode .ambient-glow {

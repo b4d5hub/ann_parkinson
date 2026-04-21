@@ -126,3 +126,35 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-teal);
 }
+
+/* Light Mode Overrides */
+.app-container.light-mode {
+  --bg-base: #f1f5f9;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #e2e8f0 0%, #f1f5f9 70%);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+.app-container.light-mode .ambient-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 150, 255, 0.1) 0%, transparent 60%);
+}
+
+.app-container.light-mode .glass-input {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-main);
+}
+
+.app-container.light-mode .custom-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.app-container.light-mode input[type="range"] {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+body:has(.light-mode) {
+  background-color: #f1f5f9;
+  background-image: radial-gradient(circle at 50% 0%, #e2e8f0 0%, #f1f5f9 70%);
+}

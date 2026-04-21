@@ -142,42 +142,42 @@ export const useAudioAnalyzer = (setParams, setAvatarSpeaking) => {
     let mockValues = {};
     if (type === 'parkinson') {
         mockValues = {
-            fo: 120 + Math.random() * 40,
-            jitter: 0.015 + Math.random() * 0.015, // High: 0.015 to 0.03
-            shimmer: 0.05 + Math.random() * 0.05,  // High: 0.05 to 0.1
-            hnr: 8 + Math.random() * 12,           // Low: 8 to 20
-            rpde: 0.5 + Math.random() * 0.2,
-            dfa: 0.7 + Math.random() * 0.2
+            fo: 120 + Math.random() * 40, fhi: 180 + Math.random() * 40, flo: 90 + Math.random() * 30,
+            jitter: 0.015 + Math.random() * 0.015, jitterAbs: 0.0001 + Math.random() * 0.0001, rap: 0.008 + Math.random() * 0.01, ppq: 0.009 + Math.random() * 0.01, jitterDDP: 0.02 + Math.random() * 0.03,
+            shimmer: 0.05 + Math.random() * 0.05, shimmerDb: 0.4 + Math.random() * 0.5, shimmerAPQ3: 0.03 + Math.random() * 0.03, shimmerAPQ5: 0.04 + Math.random() * 0.04, shimmerAPQ: 0.05 + Math.random() * 0.05, shimmerDDA: 0.09 + Math.random() * 0.09,
+            nhr: 0.05 + Math.random() * 0.05, hnr: 8 + Math.random() * 12,
+            rpde: 0.5 + Math.random() * 0.2, dfa: 0.7 + Math.random() * 0.2,
+            spread1: -4.5 + Math.random() * 1.5, spread2: 0.25 + Math.random() * 0.15, d2: 2.6 + Math.random() * 0.6, ppe: 0.25 + Math.random() * 0.15
         };
     } else if (type === 'healthy') {
         mockValues = {
-            fo: 150 + Math.random() * 50,
-            jitter: 0.001 + Math.random() * 0.005, // Low: 0.001 to 0.006
-            shimmer: 0.01 + Math.random() * 0.02,  // Low: 0.01 to 0.03
-            hnr: 25 + Math.random() * 8,           // High: 25 to 33
-            rpde: 0.2 + Math.random() * 0.2,
-            dfa: 0.5 + Math.random() * 0.15
+            fo: 180 + Math.random() * 50, fhi: 220 + Math.random() * 40, flo: 140 + Math.random() * 30,
+            jitter: 0.002 + Math.random() * 0.004, jitterAbs: 0.00002 + Math.random() * 0.00003, rap: 0.001 + Math.random() * 0.002, ppq: 0.001 + Math.random() * 0.002, jitterDDP: 0.003 + Math.random() * 0.006,
+            shimmer: 0.01 + Math.random() * 0.02, shimmerDb: 0.1 + Math.random() * 0.1, shimmerAPQ3: 0.005 + Math.random() * 0.01, shimmerAPQ5: 0.006 + Math.random() * 0.01, shimmerAPQ: 0.01 + Math.random() * 0.01, shimmerDDA: 0.015 + Math.random() * 0.03,
+            nhr: 0.005 + Math.random() * 0.01, hnr: 24 + Math.random() * 9,
+            rpde: 0.3 + Math.random() * 0.15, dfa: 0.55 + Math.random() * 0.15,
+            spread1: -7.0 + Math.random() * 1.5, spread2: 0.1 + Math.random() * 0.1, d2: 2.0 + Math.random() * 0.3, ppe: 0.1 + Math.random() * 0.1
         };
     } else {
         mockValues = {
-            fo: 80 + Math.random() * 180,
-            jitter: 0.001 + Math.random() * 0.029,
-            shimmer: 0.01 + Math.random() * 0.09,
-            hnr: 8 + Math.random() * 25,
-            rpde: 0.2 + Math.random() * 0.5,
-            dfa: 0.5 + Math.random() * 0.4
+            fo: 80 + Math.random() * 180, fhi: 100 + Math.random() * 190, flo: 60 + Math.random() * 180,
+            jitter: 0.001 + Math.random() * 0.029, jitterAbs: 0.00001 + Math.random() * 0.0002, rap: 0.001 + Math.random() * 0.02, ppq: 0.001 + Math.random() * 0.02, jitterDDP: 0.003 + Math.random() * 0.06,
+            shimmer: 0.01 + Math.random() * 0.09, shimmerDb: 0.05 + Math.random() * 0.9, shimmerAPQ3: 0.005 + Math.random() * 0.05, shimmerAPQ5: 0.005 + Math.random() * 0.06, shimmerAPQ: 0.005 + Math.random() * 0.09, shimmerDDA: 0.015 + Math.random() * 0.15,
+            nhr: 0.005 + Math.random() * 0.09, hnr: 8 + Math.random() * 25,
+            rpde: 0.2 + Math.random() * 0.5, dfa: 0.5 + Math.random() * 0.4,
+            spread1: -8 + Math.random() * 6, spread2: 0.05 + Math.random() * 0.4, d2: 1.5 + Math.random() * 2.0, ppe: 0.05 + Math.random() * 0.4
         };
     }
     
     // Animate sliders changing over 1 second instead of instant
     setParams(prev => {
         return {
-            fo: parseFloat(mockValues.fo.toFixed(1)),
-            jitter: parseFloat(mockValues.jitter.toFixed(5)),
-            shimmer: parseFloat(mockValues.shimmer.toFixed(5)),
-            hnr: parseFloat(mockValues.hnr.toFixed(2)),
-            rpde: parseFloat(mockValues.rpde.toFixed(3)),
-            dfa: parseFloat(mockValues.dfa.toFixed(3))
+            fo: parseFloat(mockValues.fo.toFixed(1)), fhi: parseFloat(mockValues.fhi.toFixed(1)), flo: parseFloat(mockValues.flo.toFixed(1)),
+            jitter: parseFloat(mockValues.jitter.toFixed(5)), jitterAbs: parseFloat(mockValues.jitterAbs.toFixed(6)), rap: parseFloat(mockValues.rap.toFixed(5)), ppq: parseFloat(mockValues.ppq.toFixed(5)), jitterDDP: parseFloat(mockValues.jitterDDP.toFixed(5)),
+            shimmer: parseFloat(mockValues.shimmer.toFixed(5)), shimmerDb: parseFloat(mockValues.shimmerDb.toFixed(4)), shimmerAPQ3: parseFloat(mockValues.shimmerAPQ3.toFixed(5)), shimmerAPQ5: parseFloat(mockValues.shimmerAPQ5.toFixed(5)), shimmerAPQ: parseFloat(mockValues.shimmerAPQ.toFixed(5)), shimmerDDA: parseFloat(mockValues.shimmerDDA.toFixed(5)),
+            nhr: parseFloat(mockValues.nhr.toFixed(5)), hnr: parseFloat(mockValues.hnr.toFixed(2)),
+            rpde: parseFloat(mockValues.rpde.toFixed(3)), dfa: parseFloat(mockValues.dfa.toFixed(3)),
+            spread1: parseFloat(mockValues.spread1.toFixed(3)), spread2: parseFloat(mockValues.spread2.toFixed(3)), d2: parseFloat(mockValues.d2.toFixed(3)), ppe: parseFloat(mockValues.ppe.toFixed(3))
         };
     });
     

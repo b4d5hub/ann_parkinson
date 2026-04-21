@@ -81,22 +81,36 @@ def predict():
         
     try:
         data = request.json
-        print(f"[POST /predict] Received data: {data}")
+        print(f"[POST /predict] Received 22-param data payload.")
         
-        # Hydrate the remaining missing variables using Healthy patient means
-        features_dict = feature_means.copy()
-        
-        # Read the 6 UI sliders
+        # Read all 22 variables from frontend payload explicitly in the correct order
         mapping = {
-            'fo': 'MDVP:Fo(Hz)', 'jitter': 'MDVP:Jitter(%)', 'shimmer': 'MDVP:Shimmer',
-            'hnr': 'HNR', 'rpde': 'RPDE', 'dfa': 'DFA'
+            "MDVP:Fo(Hz)": data.get('fo', 154), 
+            "MDVP:Fhi(Hz)": data.get('fhi', 197), 
+            "MDVP:Flo(Hz)": data.get('flo', 116), 
+            "MDVP:Jitter(%)": data.get('jitter', 0.006), 
+            "MDVP:Jitter(Abs)": data.get('jitterAbs', 0.00004), 
+            "MDVP:RAP": data.get('rap', 0.003), 
+            "MDVP:PPQ": data.get('ppq', 0.003), 
+            "Jitter:DDP": data.get('jitterDDP', 0.009), 
+            "MDVP:Shimmer": data.get('shimmer', 0.029), 
+            "MDVP:Shimmer(dB)": data.get('shimmerDb', 0.28), 
+            "Shimmer:APQ3": data.get('shimmerAPQ3', 0.015), 
+            "Shimmer:APQ5": data.get('shimmerAPQ5', 0.017), 
+            "MDVP:APQ": data.get('shimmerAPQ', 0.024), 
+            "Shimmer:DDA": data.get('shimmerDDA', 0.046), 
+            "NHR": data.get('nhr', 0.024), 
+            "HNR": data.get('hnr', 21.0), 
+            "RPDE": data.get('rpde', 0.49), 
+            "DFA": data.get('dfa', 0.71), 
+            "spread1": data.get('spread1', -5.6), 
+            "spread2": data.get('spread2', 0.22), 
+            "D2": data.get('d2', 2.38), 
+            "PPE": data.get('ppe', 0.20)
         }
-        for key, col in mapping.items():
-            if key in data:
-                features_dict[col] = float(data[key])
             
-        # Reconstruct exactly 22 shape input
-        feature_vector = np.array([[features_dict[col] for col in feature_columns]], dtype=np.float32)
+        # Reconstruct exactly 22 shape input based strictly on the mapped dict
+        feature_vector = np.array([[mapping[col] for col in feature_columns]], dtype=np.float32)
         
         # Native standardization
         scaled_vector = (feature_vector - scaler_mean) / scaler_scale

@@ -8,7 +8,7 @@ import h5py
 
 warnings.filterwarnings('ignore')
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static_dist', static_url_path='')
 CORS(app)  # Allow frontend to communicate
 
 # ── 1. Initialization: Hardcoded Standard Scaling & Feature Means ─────────────
@@ -73,6 +73,25 @@ try:
 except Exception as e:
     print(f"[ERROR] Failed to read HDF5 model: {e}")
     native_model = None
+
+# ── 3. Application Routing ──────────────────────────────────────────────────────
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return app.send_static_file(path)
+    else:
+        # Check if the React frontend is packaged (Full-Stack Docker Deployment)
+        if os.path.exists(os.path.join(app.static_folder, 'index.html')):
+            return app.send_static_file('index.html')
+            
+        # Fallback for API-Only execution (like Vercel or local terminal)
+        return jsonify({
+            'status': 'online', 
+            'service': 'Parkinsons Neural Network API',
+            'message': 'Backend is running correctly natively. (React UI not found or served externally). Send POST requests to /predict.'
+        })
 
 @app.route('/predict', methods=['POST'])
 def predict():

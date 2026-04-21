@@ -14,7 +14,10 @@ const ResultsPanel = ({ params }) => {
     const fetchPrediction = async () => {
       setLoading(true);
       try {
-        const response = await fetch('http://127.0.0.1:5000/predict', {
+        // Dynamic Routing: Localhost port 5000 for DEV, relative /predict for Docker/Vercel Prod
+        const backendUrl = import.meta.env.DEV ? 'http://127.0.0.1:5000/predict' : '/predict';
+        
+        const response = await fetch(backendUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(params)

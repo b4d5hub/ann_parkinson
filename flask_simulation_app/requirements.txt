@@ -2,5 +2,5 @@ flask
 flask-cors
 pandas
 numpy
-tensorflow
 scikit-learn
+onnxruntime-slim

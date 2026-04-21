@@ -1,0 +1,17 @@
+# Exclude large, unnecessary folders from the Vercel Serverless Function bundle
+simulation_app/
+notebooks/
+figures/
+interfaces/
+report/
+presentation/
+*.rar
+*.zip
+*.pdf
+*.docx
+.git/
+venv/
+env/
+.venv/
+node_modules/
+__pycache__/

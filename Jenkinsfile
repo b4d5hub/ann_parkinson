@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/b4d5hub/ann_parkinson.git'
+                git branch: 'main', url: 'https://github.com/b4d5hub/ann_parkinson.git'
             }
         }
 
@@ -16,8 +16,8 @@ pipeline {
 
         stage('Deploy Kubernetes') {
             steps {
-                bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl apply -f service.yaml'
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
             }
         }
     }

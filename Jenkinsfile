@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build Docker') {
             steps {
-                bat 'docker build -t webapp:latest .'
+                sh  'docker build -t webapp:latest .'
             }
         }
 

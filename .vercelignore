@@ -1,5 +1,4 @@
 # Exclude large, unnecessary folders from the Vercel Serverless Function bundle
-simulation_app/
 notebooks/
 figures/
 interfaces/

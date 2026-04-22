@@ -4,16 +4,31 @@
     {
       "src": "server.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "simulation_app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     {
+      "src": "/(.*).js",
+      "dest": "simulation_app/$1.js"
+    },
+    {
+      "src": "/(.*).css",
+      "dest": "simulation_app/$1.css"
+    },
+    {
       "src": "/predict",
-      "dest": "/server.py"
+      "dest": "server.py"
     },
     {
       "src": "/(.*)",
-      "dest": "/server.py"
+      "dest": "simulation_app/index.html"
     }
   ]
 }

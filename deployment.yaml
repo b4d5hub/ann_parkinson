@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: webapp
-          image: webapp:v2
+          image: webapp:v3
           imagePullPolicy: Never
           ports:
             - containerPort: 5000

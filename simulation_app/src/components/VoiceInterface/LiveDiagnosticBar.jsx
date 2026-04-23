@@ -72,8 +72,8 @@ const LiveDiagnosticBar = ({ isAnalyzing, startLiveAnalysis }) => {
               </span>
             )}
           </span>
-          <span style={{ fontSize: '12px', color: isAnalyzing ? 'var(--accent-teal)' : 'var(--text-muted)', fontStyle: 'italic', whiteSpace: 'nowrap' }}>
-            {isAnalyzing ? 'Analyzing 5-second sample...' : 'Results may vary — use sliders for accuracy.'}
+          <span style={{ fontSize: '11px', color: isAnalyzing ? 'var(--accent-teal)' : 'var(--text-muted)', fontStyle: 'italic' }}>
+            {isAnalyzing ? 'Analyzing 5-second sample...' : 'May give false results.'}
           </span>
         </div>
 

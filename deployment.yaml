@@ -18,6 +18,6 @@ spec:
       containers:
         - name: webapp
           image: webapp:v3
-          imagePullPolicy: if-not-present
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000

@@ -16,7 +16,7 @@ function CenterPanelContent({ avatarSpeaking, isAnalyzing, startLiveAnalysis }) 
   return (
     <>
       <div className="header-bar">
-        <h1>Neural Simulation Core</h1>
+        <h1>Neural Simulation Core - V2</h1>
       </div>
       <Avatar isSpeaking={avatarSpeaking || isAnalyzing} />
       <LiveDiagnosticBar isAnalyzing={isAnalyzing} startLiveAnalysis={startLiveAnalysis} />
@@ -27,7 +27,7 @@ function CenterPanelContent({ avatarSpeaking, isAnalyzing, startLiveAnalysis }) 
 // ─── Desktop layout: 3-column ─────────────────────────────────────────────────
 
 function DesktopLayout({ params, setParams, isAnalyzing, startLiveAnalysis, generateFakeData,
-                          isDarkMode, toggleTheme, avatarSpeaking }) {
+  isDarkMode, toggleTheme, avatarSpeaking }) {
   return (
     <div className={`app-container ${isDarkMode ? '' : 'light-mode'}`}>
       <div className="ambient-glow" />
@@ -55,13 +55,13 @@ function DesktopLayout({ params, setParams, isAnalyzing, startLiveAnalysis, gene
 // ─── Mobile layout: full-screen tabs ─────────────────────────────────────────
 
 const TABS = [
-  { id: 'controls',   label: 'Parameters', Icon: Sliders      },
-  { id: 'simulation', label: 'Simulation', Icon: Scan         },
-  { id: 'results',    label: 'Analysis',   Icon: BrainCircuit },
+  { id: 'controls', label: 'Parameters', Icon: Sliders },
+  { id: 'simulation', label: 'Simulation', Icon: Scan },
+  { id: 'results', label: 'Analysis', Icon: BrainCircuit },
 ];
 
 function MobileLayout({ params, setParams, isAnalyzing, startLiveAnalysis, generateFakeData,
-                         isDarkMode, toggleTheme, avatarSpeaking }) {
+  isDarkMode, toggleTheme, avatarSpeaking }) {
   const [activeTab, setActiveTab] = useState('simulation');
 
   return (
@@ -129,8 +129,8 @@ function MobileLayout({ params, setParams, isAnalyzing, startLiveAnalysis, gener
 
 function App() {
   const [avatarSpeaking, setAvatarSpeaking] = useState(false);
-  const [isDarkMode, setIsDarkMode]         = useState(true);
-  const isMobile                            = useIsMobile(767);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const isMobile = useIsMobile(767);
 
   const [params, setParams] = useState({
     fo: 154, fhi: 197, flo: 116,

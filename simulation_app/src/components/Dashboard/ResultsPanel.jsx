@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-const ResultsPanel = ({ params, extraClass = '' }) => {
+const ResultsPanel = ({ params, mobileMode = false }) => {
   const [probability, setProbability] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -160,8 +160,19 @@ const ResultsPanel = ({ params, extraClass = '' }) => {
     }
   };
 
+  // On mobile the parent .mobile-panel does the scrolling, so no fixed height needed.
+  const outerStyle = mobileMode
+    ? { display: 'flex', flexDirection: 'column', flex: 1 }
+    : { height: '100%', display: 'flex', flexDirection: 'column' };
+  const outerClass = mobileMode
+    ? 'glass-panel'
+    : 'glass-panel right-panel';
+  const panelStyle = mobileMode
+    ? { borderRadius: 0, border: 'none', borderBottom: '1px solid var(--glass-border)' }
+    : {};
+
   return (
-    <div className={`glass-panel right-panel ${extraClass}`} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div className={outerClass} style={{ ...outerStyle, ...panelStyle }}>
       <div style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '16px', marginBottom: '24px' }}>
         <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-main)', fontSize: '18px', textTransform: 'uppercase', letterSpacing: '2px' }}>
           <BrainCircuit size={20} /> Analysis

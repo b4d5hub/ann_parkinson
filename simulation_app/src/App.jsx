@@ -7,11 +7,13 @@ import ControlsPanel from './components/Dashboard/ControlsPanel';
 import ResultsPanel from './components/Dashboard/ResultsPanel';
 import LiveDiagnosticBar from './components/VoiceInterface/LiveDiagnosticBar';
 import { useAudioAnalyzer } from './hooks/useAudioAnalyzer';
+import { Sliders, BrainCircuit, Scan } from 'lucide-react';
 
 function App() {
   const [avatarSpeaking, setAvatarSpeaking] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  
+  const [mobileTab, setMobileTab] = useState('center'); // 'controls' | 'center' | 'results'
+
   const [params, setParams] = useState({
     fo: 154, fhi: 197, flo: 116,
     jitter: 0.006, jitterAbs: 0.00004, rap: 0.003, ppq: 0.003, jitterDDP: 0.009,
@@ -26,31 +28,70 @@ function App() {
   return (
     <div className={`app-container ${isDarkMode ? '' : 'light-mode'}`}>
       <div className="ambient-glow"></div>
-      
-      <ControlsPanel 
-        params={params} 
-        setParams={setParams} 
-        startLiveAnalysis={startLiveAnalysis} 
+
+      <ControlsPanel
+        params={params}
+        setParams={setParams}
+        startLiveAnalysis={startLiveAnalysis}
         isAnalyzing={isAnalyzing}
         generateFakeData={generateFakeData}
         isDarkMode={isDarkMode}
         toggleTheme={() => setIsDarkMode(!isDarkMode)}
+        extraClass={mobileTab === 'controls' ? 'mobile-active' : ''}
       />
-      
-      <div className="center-panel">
+
+      <div className={`center-panel${mobileTab === 'center' ? ' mobile-active' : ''}`}>
         <div className="header-bar">
           <h1>Neural Simulation Core</h1>
         </div>
-        
+
         <Avatar isSpeaking={avatarSpeaking || isAnalyzing} />
-        
-        <LiveDiagnosticBar 
-          isAnalyzing={isAnalyzing} 
-          startLiveAnalysis={startLiveAnalysis} 
+
+        <LiveDiagnosticBar
+          isAnalyzing={isAnalyzing}
+          startLiveAnalysis={startLiveAnalysis}
         />
       </div>
 
-      <ResultsPanel params={params} />
+      <ResultsPanel
+        params={params}
+        extraClass={mobileTab === 'results' ? 'mobile-active' : ''}
+      />
+
+      {/* ---- Mobile bottom navigation ---- */}
+      <nav className="mobile-nav" aria-label="Main navigation">
+        <div className="mobile-nav-inner">
+          <button
+            id="mob-nav-controls"
+            className={`mobile-nav-btn ${mobileTab === 'controls' ? 'active' : ''}`}
+            onClick={() => setMobileTab('controls')}
+            aria-label="Parameters panel"
+          >
+            <Sliders size={20} />
+            Parameters
+          </button>
+
+          <button
+            id="mob-nav-center"
+            className={`mobile-nav-btn ${mobileTab === 'center' ? 'active' : ''}`}
+            onClick={() => setMobileTab('center')}
+            aria-label="Neural simulation view"
+          >
+            <Scan size={20} />
+            Simulation
+          </button>
+
+          <button
+            id="mob-nav-results"
+            className={`mobile-nav-btn ${mobileTab === 'results' ? 'active' : ''}`}
+            onClick={() => setMobileTab('results')}
+            aria-label="Analysis results panel"
+          >
+            <BrainCircuit size={20} />
+            Analysis
+          </button>
+        </div>
+      </nav>
     </div>
   );
 }

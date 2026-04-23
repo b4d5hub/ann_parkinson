@@ -31,9 +31,12 @@ body {
   background-image: var(--bg-gradient);
   color: var(--text-main);
   min-height: 100vh;
-  overflow: hidden;
+  overflow: hidden; /* overridden at tablet/mobile in App.css */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent text resize on orientation change */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -189,4 +192,35 @@ h1, h2, h3, h4, h5, h6 {
 body:has(.light-mode) {
   background-color: #f1f5f9;
   background-image: radial-gradient(circle at 50% 0%, #e2e8f0 0%, #f1f5f9 70%);
+}
+
+/* ============================================================
+   RESPONSIVE OVERRIDES
+   ============================================================ */
+
+/* Tighter glass panel padding on mobile */
+@media (max-width: 767px) {
+  .glass-panel {
+    padding: 16px;
+    border-radius: 0;
+  }
+
+  /* Hide verbose diagnostic text on very small screens */
+  .diag-text,
+  .diag-divider,
+  .diag-ready {
+    display: none;
+  }
+
+  .glass-button {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+}
+
+/* Slightly reduced panel padding on tablets */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .glass-panel {
+    padding: 18px;
+  }
 }

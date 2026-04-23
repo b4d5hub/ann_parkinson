@@ -56,13 +56,13 @@ const UI_SLIDERS = [
   { key: 'ppe', label: 'PPE', min: 0.05, max: 0.5, step: 0.01, icon: Sliders }
 ];
 
-const ControlsPanel = ({ params, setParams, startLiveAnalysis, isAnalyzing, generateFakeData, isDarkMode, toggleTheme }) => {
+const ControlsPanel = ({ params, setParams, startLiveAnalysis, isAnalyzing, generateFakeData, isDarkMode, toggleTheme, extraClass = '' }) => {
   const handleChange = (key, val) => {
     setParams(prev => ({ ...prev, [key]: parseFloat(val) }));
   };
 
   return (
-    <div className="glass-panel left-panel" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div className={`glass-panel left-panel ${extraClass}`} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
             <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-main)', fontSize: '18px', textTransform: 'uppercase', letterSpacing: '2px' }}>

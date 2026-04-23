@@ -52,11 +52,28 @@ const LiveDiagnosticBar = ({ isAnalyzing, startLiveAnalysis }) => {
 
         {/* Status text — hidden on very small screens via CSS */}
         <div className="diag-text" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-          <span style={{ fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '1px', whiteSpace: 'nowrap' }}>
-            {isAnalyzing ? 'Extracting Vocal Markers...' : 'Live Web Audio Diagnostic'}
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}>
+            <span style={{ fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '1px' }}>
+              {isAnalyzing ? 'Extracting Vocal Markers...' : 'Live Web Audio Diagnostic'}
+            </span>
+            {!isAnalyzing && (
+              <span style={{
+                fontSize: '9px',
+                fontWeight: '700',
+                letterSpacing: '1px',
+                color: '#000',
+                background: 'linear-gradient(135deg, var(--accent-teal), var(--accent-purple))',
+                borderRadius: '4px',
+                padding: '1px 5px',
+                textTransform: 'uppercase',
+                flexShrink: 0,
+              }}>
+                BETA
+              </span>
+            )}
           </span>
-          <span style={{ fontSize: '13px', color: isAnalyzing ? 'var(--accent-teal)' : 'var(--text-main)', fontStyle: 'italic', whiteSpace: 'nowrap' }}>
-            {isAnalyzing ? 'Analyzing 5-second sample...' : 'Press Mic & read a short sentence.'}
+          <span style={{ fontSize: '12px', color: isAnalyzing ? 'var(--accent-teal)' : 'var(--text-muted)', fontStyle: 'italic', whiteSpace: 'nowrap' }}>
+            {isAnalyzing ? 'Analyzing 5-second sample...' : 'Results may vary — use sliders for accuracy.'}
           </span>
         </div>
 

@@ -16,7 +16,7 @@ function CenterPanelContent({ avatarSpeaking, isAnalyzing, startLiveAnalysis }) 
   return (
     <>
       <div className="header-bar">
-        <h1>Neural Simulation Core - V7</h1>
+        <h1>Neural Simulation Core - VVV</h1>
       </div>
       <Avatar isSpeaking={avatarSpeaking || isAnalyzing} />
       <LiveDiagnosticBar isAnalyzing={isAnalyzing} startLiveAnalysis={startLiveAnalysis} />

@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build Docker') {
             steps {
-                sh 'docker build -t webapp:latest1 .'
+                sh 'docker build -t webapp:latest .'
             }
         }
         stage('Deploy Kubernetes') {

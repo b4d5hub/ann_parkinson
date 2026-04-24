@@ -14,9 +14,9 @@ pipeline {
         }
         stage('Deploy Kubernetes') {
             steps {
+                sh 'kubectl delete deployment webapp --ignore-not-found'
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'
-                sh 'kubectl rollout restart deployment webapp'
             }
         }
     }

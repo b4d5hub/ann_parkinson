@@ -1,6 +1,7 @@
 # Stage 1: Build the React Frontend
 FROM node:22-alpine as build-stage
 WORKDIR /app/frontend
+ARG CACHE_BUST=1
 # Copy package definitions and install
 COPY simulation_app/package*.json ./
 RUN npm install

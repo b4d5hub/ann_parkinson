@@ -9,13 +9,14 @@ pipeline {
         }
         stage('Build Docker') {
             steps {
-                sh 'docker build -t webapp:v6 .'
+                sh 'docker build -t webapp:latest .'
             }
         }
         stage('Deploy Kubernetes') {
             steps {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'
+                sh 'kubectl rollout restart deployment webapp'
             }
         }
     }

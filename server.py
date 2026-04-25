@@ -80,18 +80,21 @@ except Exception as e:
 @app.route('/<path:path>')
 def serve(path):
     if path != "" and os.path.exists(app.static_folder + '/' + path):
-        return app.send_static_file(path)
+        response = app.make_response(app.send_static_file(path))
     else:
-        # Check if the React frontend is packaged (Full-Stack Docker Deployment)
         if os.path.exists(os.path.join(app.static_folder, 'index.html')):
-            return app.send_static_file('index.html')
-            
-        # Fallback for API-Only execution (like Vercel or local terminal)
-        return jsonify({
-            'status': 'online', 
-            'service': 'Parkinsons Neural Network API',
-            'message': 'Backend is running correctly natively. (React UI not found or served externally). Send POST requests to /predict.'
-        })
+            response = app.make_response(app.send_static_file('index.html'))
+        else:
+            return jsonify({
+                'status': 'online',
+                'service': 'Parkinsons Neural Network API',
+                'message': 'Backend is running correctly natively. (React UI not found or served externally). Send POST requests to /predict.'
+            })
+
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @app.route('/predict', methods=['POST'])
 def predict():
